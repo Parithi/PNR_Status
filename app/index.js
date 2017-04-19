@@ -1,52 +1,78 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   Text,
-  View
+  Image,
+  StyleSheet
 } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 
-export default class PNR_Status extends Component {
+class HomeActivity extends React.Component {
+  static navigationOptions = {
+    tabBarLabel: 'Check PNR',
+    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('./img/ic_train_black_24dp.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
+  render() {
+    return <Text>List of all contacts</Text>;
+  }
+}
+
+class HistoryActivity extends React.Component {
+  static navigationOptions = {
+    tabBarLabel: 'History',
+    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('./img/ic_history_black_24dp.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Text>List of all history</Text>
     );
   }
 }
 
+const MainNavigator = TabNavigator({
+  CheckPNR : { screen: HomeActivity },
+  History : { screen: HistoryActivity },
+},
+ {tabBarOptions: {
+  activeTintColor: '#FFFFFF',
+  indicatorStyle:{
+    backgroundColor: '#FFFFFF'
+  },
+  labelStyle: {
+    fontSize: 12,
+    fontWeight: "bold"
+  },
+  style: {
+    backgroundColor: '#D42614',
+  },
+}
+ }
+);
+
+MainNavigator.navigationOptions = {
+  title: 'PNR Status',
+};
+
+const PNR_Status = StackNavigator({
+  CheckPNR: { screen: MainNavigator }
+});
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  icon: {
+    width: 26,
+    height: 26,
   },
 });
 
