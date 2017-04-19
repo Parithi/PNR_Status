@@ -1,2 +1,3 @@
-# PNR_Status
+# PNR Status
+
 A PNR Status app made using React Native
