@@ -6,11 +6,12 @@ import {
     StyleSheet
 } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import HomeActivity from "./HomeActivity";
+import PNRActivity from "./PNRActivity";
 import HistoryActivity from "./HistoryActivity";
+import DetailActivity from "./DetailActivity";
 
 const MainNavigator = TabNavigator({
-    CheckPNR: { screen: HomeActivity },
+    CheckPNR: { screen: PNRActivity },
     History: { screen: HistoryActivity },
 },
     {
@@ -36,7 +37,11 @@ MainNavigator.navigationOptions = {
 };
 
 const PNR_Status = StackNavigator({
-    CheckPNR: { screen: MainNavigator }
+    CheckPNR: { screen: MainNavigator },
+    Detail: {
+        path: 'number/:number',
+        screen: DetailActivity,
+    }
 });
 
 AppRegistry.registerComponent('PNR_Status', () => PNR_Status);
